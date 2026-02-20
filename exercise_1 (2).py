@@ -91,3 +91,85 @@ def count(root):
     return 1+ count(root.left) + count(root.right)
  
 
+
+
+
+#یا به صورت زیر
+
+class Tree_Node:
+    def __init__(self , x):
+        self.Data = x
+        self.Lchild = None
+        self.Rchild = None
+
+
+# تابع بازگشتی بنویسید که تعداد برگ های درخت باینری روت را محاسبه کند
+def Count_leaves(root):
+    if root is None:
+        return 0
+    if root.Lchild is None and root.Rchild is None:
+        return 1
+    return Count_leaves(root.Lchild) + Count_leaves(root.Rchild)
+
+
+# تابع بازگشتی بنویسید که گره های درجه یک درخت باینری را محاسبه کند
+def Count_1Deg(root):
+    if root is None:
+        return 0
+    
+    count = 0
+    if (root.Lchild is None and root.Rchild is not None) or (root.Lchild is not None and root.Rchild is None):
+        count = 1
+        
+    return count + Count_1Deg(root.Lchild) + Count_1Deg(root.Rchild)
+
+
+# تابع بازگشتی بنویسید که گره های درجه دو درخت باینری را محاسبه کند
+def Count_2Deg(root):
+    if root is None:
+        return 0
+    
+    count = 0
+    if root.Lchild is not None and root.Rchild is not None:
+        count = 1
+        
+    return count + Count_2Deg(root.Lchild) + Count_2Deg(root.Rchild)
+
+
+# تابعی بازگشتی بنویسید که حاصل جمع تمامی داده های یک درخت دودویی را بازگرداند
+def sum_Tree(root):
+    if root is None:
+        return 0
+    return root.Data + sum_Tree(root.Lchild) + sum_Tree(root.Rchild)
+
+
+# تابعی بازگشتی بنویسید که تعداد نود های یک درخت باینری را بازگرداند
+def Count(root):
+    if root is None:
+        return 0
+    return 1 + Count(root.Lchild) + Count(root.Rchild)
+
+
+# پیمایش preorder درخت
+def pre(root):
+    if root is None:
+        return
+    print(root.Data)
+    pre(root.Lchild)
+    pre(root.Rchild)
+
+
+# تابعی بازگشتی بنویسید که مقدار تارگت را در یک درخت جستجو کند
+def search(root , t):
+    if root is None:
+        return False
+    if root.Data == t:
+        return True
+    return search(root.Lchild , t) or search(root.Rchild , t)
+
+
+# تابعی بازگشتی بنویسید که مقدار حداکثر یک درخت را بازگرداند
+def max_t(root):
+    if root is None:
+        return float("-inf")
+    return max(root.Data , max_t(root.Lchild) , max_t(root.Rchild))
